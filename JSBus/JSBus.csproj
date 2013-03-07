@@ -134,10 +134,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Sample\Messages\ICommand.cs" />
-    <Compile Include="Sample\JSBusTestHub.cs" />
-    <Compile Include="Sample\Messages\TestEvent.cs" />
-    <Compile Include="Sample\Messages\TestCommand.cs" />
+    <Compile Include="Samples\JSBus.SignalR\Messages\ICommand.cs" />
+    <Compile Include="Samples\JSBus.SignalR\JSBusTestHub.cs" />
+    <Compile Include="Samples\JSBus.SignalR\Messages\TestEvent.cs" />
+    <Compile Include="Samples\JSBus.SignalR\Messages\TestCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,8 +151,8 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <None Include="Nuget\PackageAll.cmd" />
     <Content Include="Nuget\Readme.txt" />
-    <Content Include="Sample\Index.html" />
-    <Content Include="Sample\Site.css" />
+    <Content Include="Samples\JSBus.SignalR\Index.html" />
+    <Content Include="Samples\JSBus.SignalR\Site.css" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
@@ -207,8 +207,8 @@
     <Content Include="Scripts\JSBus\TransportInterfaces.min.js">
       <DependentUpon>TransportInterfaces.ts</DependentUpon>
     </Content>
-    <Content Include="Sample\sampleUsage.js" />
-    <Content Include="Sample\DataBar.js" />
+    <Content Include="Samples\JSBus.SignalR\sampleUsage.js" />
+    <Content Include="Samples\JSBus.SignalR\DataBar.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
