@@ -1,13 +1,12 @@
-﻿using System;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-[assembly: WebActivator.PreApplicationStartMethod(
-    typeof($rootnamespace$.App_Start.JSBus), "PreStart")]
+[assembly: WebActivator.PostApplicationStartMethod(
+    typeof($rootnamespace$.App_Start.JSBusBundleConfig), "PostStart")]
 
 namespace $rootnamespace$.App_Start {
     public static class JSBusBundleConfig {
-        public static void PreStart() {
-            bundles.Add(new ScriptBundle("~/bundles/JSBus").Include(
+        public static void PostStart() {
+            BundleTable.Bundles.Add(new ScriptBundle("~/bundles/JSBus").Include(
                 "~/Scripts/JSBus/LocalStorageStore.js", 
                 "~/Scripts/JSBus/LocalStorageQueue.js",
                 "~/Scripts/JSBus/Bus.js")

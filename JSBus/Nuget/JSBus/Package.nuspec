@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>JSBus</id>
-    <version>1.0.0-beta2</version>
+    <version>1.0.0</version>
     <authors>Tero Teelahti</authors>
     <owners>Tero Teelahti</owners>
     <licenseUrl>https://raw.github.com/teelahti/JSBus/master/LICENSE.md</licenseUrl>
@@ -29,5 +29,6 @@
     <file src="..\..\Scripts\JSBus\LocalStorageQueue.min.js" target="content\Scripts\JSBus" />
     <file src="..\..\Scripts\JSBus\Bus.js" target="content\Scripts\JSBus" />
     <file src="..\..\Scripts\JSBus\Bus.min.js" target="content\Scripts\JSBus" />
+    <file src="Content\**" target="content" />
   </files>
 </package>

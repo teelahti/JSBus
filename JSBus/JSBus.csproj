@@ -145,7 +145,8 @@
     <Content Include="Nuget\JSBus.SignalR\Content\App_Start\JSBusSignalRBundleConfig.cs.pp" />
     <Content Include="Nuget\JSBus.SignalR\Package.nuspec" />
     <Content Include="Nuget\JSBus.SignalR.Sample\Package.nuspec" />
-    <Content Include="Nuget\JSBus.SignalR.Sample\Content\App_Start\JSBusRegisterSampleHub.cs.pp" />
+    <Content Include="Nuget\JSBus.SignalR.Sample\Content\App_Start\JSBusRegisterSample.cs.pp" />
+    <Content Include="Nuget\PushAll.cmd" />
     <None Include="Nuget\JSBus\Content\App_Start\JSBusBundleConfig.cs.pp" />
     <Content Include="Nuget\JSBus\Package.nuspec" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>JSBus.SignalR.Sample</id>
-    <version>1.0.0-beta2</version>
+    <version>1.0.0</version>
     <authors>Tero Teelahti</authors>
     <owners>Tero Teelahti</owners>
     <licenseUrl>https://raw.github.com/teelahti/JSBus/master/LICENSE.md</licenseUrl>
@@ -19,12 +19,13 @@
     <copyright>Copyright 2013 Tero Teelahti</copyright>
     <tags>JavaScript web realtime bus signalr sample</tags>
     <dependencies>
-      <dependency id="JSBus.SignalR" version="1.0.0-beta" />
+      <dependency id="JSBus.SignalR" version="1.0.0" />
       <dependency id="Microsoft.AspNet.SignalR.SystemWeb" version="1.0.1"/>
       <dependency id="WebActivator" version="1.5" />
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\Sample\**" target="content\Samples\JSBus.SignalR" />
+    <file src="..\..\Samples\**" target="content\Samples" />
+    <file src="Content\**" target="content" />
   </files>
 </package>
