@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>JSBus.SignalR.Sample</id>
-    <version>1.0.0-beta</version>
+    <version>1.0.0-beta2</version>
     <authors>Tero Teelahti</authors>
     <owners>Tero Teelahti</owners>
     <licenseUrl>https://raw.github.com/teelahti/JSBus/master/LICENSE.md</licenseUrl>
@@ -12,13 +12,10 @@
     <summary>
       A sample project for JSBus.SignalR
     </summary>
-    <description>
-      JavaScript library to do store and forward in the browser using 
-      browser localstorage as intermediary store. This package contains 
-      an usage sample to demonstrate API usage. 
-      For detailed usage see project page.
+    <description>JavaScript library to do store and forward in the browser using browser localstorage as intermediary store. This package contains an usage sample to demonstrate API usage. 
+    For detailed usage see project page.
     </description>
-    <releaseNotes>Initial release, feature complete.</releaseNotes>
+    <releaseNotes>Fixed webactivator issues.</releaseNotes>
     <copyright>Copyright 2013 Tero Teelahti</copyright>
     <tags>JavaScript web realtime bus signalr sample</tags>
     <dependencies>

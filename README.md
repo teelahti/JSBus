@@ -21,13 +21,13 @@ Client can subscribe to server sent events. See below for more detailed usage.
 If you use NuGet package management, install one of the three packages 
 via Install-Package command or NuGet GUI: 
 
-- *JSBus*: Core library without any client-server transport implementation. 
+- [JSBus](http://nuget.org/packages/JSBus/): Core library without any client-server transport implementation. 
 After package installation remember to include scripts in your page (package 
 creates JavaScript bundle ~/bundles/JSBus for your convenience).
-- *JSBus.SignalR*: Core library + SignalR send and subscribe transports
+- [JSBus.SignalR](http://nuget.org/packages/JSBus.SignalR/): Core library + SignalR send and subscribe transports
 After package installation remember to include scripts in your page (package 
 creates JavaScript bundle ~/bundles/JSBusSignalR for your convenience).
-- *JSBus.SignalR.Sample*: Sample usage; this package adds a folder 
+- [JSBus.SignalR.Sample](http://nuget.org/packages/JSBus.SignalR.Sample/): Sample usage; this package adds a folder 
 Samples/JSBus.SignalR into your project. Open index.html from this folder 
 in your browser, test functionality, and view the source.
 
@@ -70,7 +70,8 @@ JSBus can be used with different transport mechanisms. On ASP.NET the most viabl
 option is to use [SignalR](http://signalr.net) for server to client communication, 
 and SignalR or [ASP.NET Web API](http://www.asp.net/web-api) for client to server 
 communication. JSBus is not limited to these options, you can write your own transports 
-by implementing the following two "interfaces" found from TransportInterfaces.ts: 
+by implementing the following two "interfaces" found from 
+[TransportInterfaces.ts](https://github.com/teelahti/JSBus/blob/master/JSBus/Scripts/JSBus/TransportInterfaces.ts): 
 
     interface ISendTransport {
         // return value "any" must be a promises/A compatible promise 
@@ -85,7 +86,9 @@ by implementing the following two "interfaces" found from TransportInterfaces.ts
 These can be naturally implemented in either TypeScript or vanilla JavaScript (or 
 whatever variant suits you).
 
-SignalR transport is provided (see folder Scripts/JSBus.SignalR or use NuGet package JSBus.SignalR). 
+SignalR transport is provided (see folder 
+[Scripts/JSBus.SignalR](https://github.com/teelahti/JSBus/tree/master/JSBus/Scripts/JSBus.SignalR) 
+or use NuGet package JSBus.SignalR). 
 
 Transports are given to JSBus constructor during initialization:
 
