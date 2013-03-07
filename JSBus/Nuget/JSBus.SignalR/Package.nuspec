@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>JSBus.SignalR</id>
+    <version>1.0.0-beta</version>
+    <authors>Tero Teelahti</authors>
+    <owners>Tero Teelahti</owners>
+    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>-->
+    <!--<projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>-->
+    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>
+      A SignalR transport implementation for JSBus
+    </summary>
+    <description>
+      JavaScript library to do store and forward in the browser using 
+      browser localstorage as intermediary store. This is the transport 
+      implementation that supplements the core JSBus library.
+      For detailed usage see project page.
+    </description>
+    <releaseNotes>Initial release, feature complete.</releaseNotes>
+    <copyright>Copyright 2013 Tero Teelahti</copyright>
+    <tags>JavaScript web realtime bus signalr</tags>
+    <dependencies>
+      <dependency id="JSBus" version="1.0.0-beta" />
+      <dependency id="Microsoft.AspNet.SignalR.JS" version="1.0.1"/>
+      <dependency id="WebActivator" version="1.5" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\Scripts\JSBus.SignalR\SignalRSendTransport.js" target="content\Scripts\JSBus" />
+    <file src="..\..\Scripts\JSBus.SignalR\SignalRSendTransport.min.js" target="content\Scripts\JSBus" />
+    <file src="..\..\Scripts\JSBus.SignalR\SignalRSubscribeTransport.js" target="content\Scripts\JSBus" />
+    <file src="..\..\Scripts\JSBus.SignalR\SignalRSubscribeTransport.min.js" target="content\Scripts\JSBus" />
+  </files>
+</package>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>JSBus</id>
+    <version>1.0.0-beta</version>
+    <authors>Tero Teelahti</authors>
+    <owners>Tero Teelahti</owners>
+    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>-->
+    <!--<projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>-->
+    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>
+      A JavaScript message bus. 
+    </summary>
+    <description>
+      JavaScript library to do store and forward in the browser using 
+      browser localstorage as intermediary store. This is the core 
+      library that does not have any transport to actually send or 
+      receive messages with server. Create one of your own or use 
+      JSBus.SignalR package for SignalR based transport implementations. 
+      For detailed usage see project page.
+    </description>
+    <releaseNotes>Initial release, feature complete.</releaseNotes>
+    <copyright>Copyright 2013 Tero Teelahti</copyright>
+    <tags>JavaScript web realtime bus</tags>
+    <dependencies>
+      <dependency id="WebActivator" version="1.5" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\Scripts\JSBus\LocalStorageStore.js" target="content\Scripts\JSBus" />
+    <file src="..\..\Scripts\JSBus\LocalStorageStore.min.js" target="content\Scripts\JSBus" />
+    <file src="..\..\Scripts\JSBus\LocalStorageQueue.js" target="content\Scripts\JSBus" />
+    <file src="..\..\Scripts\JSBus\LocalStorageQueue.min.js" target="content\Scripts\JSBus" />
+    <file src="..\..\Scripts\JSBus\Bus.js" target="content\Scripts\JSBus" />
+    <file src="..\..\Scripts\JSBus\Bus.min.js" target="content\Scripts\JSBus" />
+  </files>
+</package>

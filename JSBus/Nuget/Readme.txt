@@ -1,0 +1,1 @@
+﻿This folder contains Nuget packaging to distribute JSBus via Nuget.
