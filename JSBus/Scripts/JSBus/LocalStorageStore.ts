@@ -89,7 +89,7 @@ module JSBus {
             var move = queue.removeWhereLastOperationOlderThan(cutOffMS);
 
             for (var i = move.length - 1; i >= 0; i--) {
-                console.log("Moving message %i %s --> %s", move[i].id, queue.name, this.outgoing.name);
+                console.log("Moving message %s %s --> %s", move[i].id, queue.name, this.outgoing.name);
                 this.outgoing.add(move[i].id, move[i]);
             }
         }

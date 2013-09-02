@@ -28,6 +28,16 @@ module JSBus {
         }
 
         send(message: any) {
+            // Validate
+            if (!message) {
+                return;
+            }
+
+            // If ID property is missing generate it.
+            if (!message.id) {
+                message.id = (new Date()).getTime();
+            }
+
             this.store.add(message);
 
             // Use outer loop to send
