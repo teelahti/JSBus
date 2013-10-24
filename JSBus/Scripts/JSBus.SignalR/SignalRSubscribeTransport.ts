@@ -7,17 +7,18 @@ module JSBus {
         private receiveCallbacks: JQueryCallback = $.Callbacks();
         private ackCallbacks: JQueryCallback = $.Callbacks();
 
-        constructor(client: any) {
-            // Extend signalR client side hub with methods that server will call
-            $.extend(client, {
-                ack: id => {
-                    console.log("Received ack from server", id);
-                    this.ackCallbacks.fire(id);
-                },
-                onEvent: message => {
-                    console.log("Received event from server", message);
-                    this.receiveCallbacks.fire(message);
-                }
+        constructor(hub: any) {
+            // Extend signalR client side hub with methods that server will call. 
+            // Use 'on' instead of directly modifying objects, as 'on' works 
+            // also if hub has been started before this code is reached.
+            hub.on('ack', id => {
+                console.log("Received ack from server", id);
+                this.ackCallbacks.fire(id);
+            });
+
+            hub.on('onEvent', message => {
+                console.log("Received event from server", message);
+                this.receiveCallbacks.fire(message);
             });
         }
 

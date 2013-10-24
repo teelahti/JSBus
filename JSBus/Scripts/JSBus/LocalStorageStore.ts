@@ -8,9 +8,9 @@ module JSBus {
     export class LocalStorageStore implements IStore {
         public containerName: string = 'default';
 
-        _outgoing: LocalStorageQueue;
-        _sent: LocalStorageQueue;
-        _retry: LocalStorageQueue;
+        private _outgoing: LocalStorageQueue;
+        private _sent: LocalStorageQueue;
+        private _retry: LocalStorageQueue;
 
         initQueues() {
             if (!this._outgoing) {
@@ -60,8 +60,8 @@ module JSBus {
             msgs.forEach((m: IMessage) => {
                 // Callback returns a promise with message id as value
                 sendCallback(m).then(
-                    id => { this.markSent(id); },
-                    function (err) {
+                    id => this.markSent(id),
+                    err => {
                         console.log("Error sending message, delaying:", m, err);
                         this.delay(m.id);
                     });

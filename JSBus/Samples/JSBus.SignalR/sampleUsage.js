@@ -2,8 +2,8 @@
     // Proxy for server side hub
     var testHub = $.connection.sample,
         // SignalR send transport
-        sendTransport = new JSBus.SignalRSendTransport(testHub.server),
-        subscribeTransport = new JSBus.SignalRSubscribeTransport(testHub.client),
+        sendTransport = new JSBus.SignalRSendTransport(testHub),
+        subscribeTransport = new JSBus.SignalRSubscribeTransport(testHub),
         form = document.getElementById("sendMessages"),
         bus = new JSBus.Bus("testTopic", sendTransport, subscribeTransport),
         
@@ -23,19 +23,32 @@
     // Initialize form only after SignalR initialization has taken place
     $.connection.hub.start(function () {
         form.addEventListener("submit", function (e) {
-            var idSeed = Date.now();
+            var idSeed = Date.now(),
+                commands = [];
 
             e.preventDefault();
 
             // TODO: Disable elements until done
-            // TODO: This takes all the cycles --> demo values not changing
+            
+            // Create a list of commands to send:
             for (var i = 0; i < form.count.valueAsNumber; i++) {
-                bus.send({ id: idSeed + i, name: "test message" });
-                
-                // Change counter value on UI
-                status.notSent.value--;
-                status.outgoingQueue.value++;
+                commands.push({ id: idSeed + i, name: "test message" });
             }
+
+            // Normal for-loop would take all the cycles --> all demo values not changing. 
+            // Therefore chunk the list and use setTimeout to do some other tasks 
+            // every now and then.
+            timedChunk(
+                commands,
+                function (item) {
+                    bus.send(item);
+                    
+                    // Change counter value on UI
+                    status.notSent.value--;
+                    status.outgoingQueue.value++;
+                },
+                this,
+                function () { console.log("All given to bus"); });
         }, false);
     });
     
@@ -72,4 +85,25 @@
         status.atServer.value--;
         status.done.value++;
     }, "TestEvent");
+    
+    //Copyright 2009 Nicholas C. Zakas. All rights reserved.
+    //MIT Licensed
+    function timedChunk(items, process, context, callback) {
+        var todo = items.concat();   //create a clone of the original
+
+        setTimeout(function () {
+
+            var start = +new Date();
+
+            do {
+                process.call(context, todo.shift());
+            } while (todo.length > 0 && (+new Date() - start < 50));
+
+            if (todo.length > 0) {
+                setTimeout(arguments.callee, 25);
+            } else {
+                callback(items);
+            }
+        }, 25);
+    }
 }());

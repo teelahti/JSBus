@@ -1,3 +1,4 @@
+/// <reference path="TransportInterfaces.ts" />
 var JSBus;
 (function (JSBus) {
     var LocalStorageQueue = (function () {
@@ -28,15 +29,19 @@ var JSBus;
             var q = this.queue, m = new MessageContainer(id, message);
 
             if (operationDate) {
+                // use MS format as this is used only for queu to queue
+                // transfers where comparison is done based on milliseconds
                 m.lastOperationAt = operationDate.getTime();
             }
 
             q.push(m);
 
+            // Save altered queue back to localstorage
             this.queue = q;
         };
 
         LocalStorageQueue.prototype.remove = function (id) {
+            // Removes an item and returns it (to be placed on any other store)
             var matching = this.removeWhenMatches(function (m) {
                 return m.id == id;
             });
@@ -62,6 +67,7 @@ var JSBus;
             var len = q.length;
             while (len--) {
                 if (operator(q[len])) {
+                    // match, store for return & remove
                     matching.push(q[len]);
                     q.splice(len, 1);
                 }

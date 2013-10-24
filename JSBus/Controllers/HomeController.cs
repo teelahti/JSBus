@@ -6,7 +6,7 @@ namespace JSBus.Controllers
     {
         public ActionResult Index()
         {
-            return this.Redirect("~/Sample/");
+            return this.Redirect("~/Samples/JSBus.SignalR/");
         }
     }
 }

@@ -1,18 +1,13 @@
-
-using JSBus.App_Start;
-
-[assembly: WebActivator.PreApplicationStartMethod(typeof(RegisterHubs), "Start")]
-
 namespace JSBus.App_Start
 {
-    using System.Web.Routing;
+    using Owin;
 
-    public static class RegisterHubs
+    public class Startup
     {
-        public static void Start()
+        public void Configuration(IAppBuilder app)
         {
             // Register the default hubs route: ~/signalr/hubs
-            RouteTable.Routes.MapHubs();
+            app.MapSignalR();
         }
     }
 }

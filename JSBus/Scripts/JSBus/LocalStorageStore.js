@@ -1,5 +1,9 @@
+/// <reference path="TransportInterfaces.ts" />
+/// <reference path="LocalStorageQueue.ts" />
 var JSBus;
 (function (JSBus) {
+    // TODO: Create fail counter to avoid trying infinitely
+    // TODO: Consider using separate delayPolicy class to specify times, like new IncreasingDelay(5, 200)
     var LocalStorageStore = (function () {
         function LocalStorageStore() {
             this.containerName = 'default';
@@ -10,8 +14,11 @@ var JSBus;
                 this._sent = new JSBus.LocalStorageQueue(this.containerName + "." + "sent");
                 this._retry = new JSBus.LocalStorageQueue(this.containerName + "." + "retry");
 
+                // Also init timers to transfer stuff from queue to queue
+                // Retry failed sendings when message is older than 30 s. Check every 10 s.
                 setInterval(this.moveBackToOutgoing.bind(this, this.retry, 30000), 10000);
 
+                // Move sent back to outgoing if there is no ack from server after 60 s. Check every 10 s
                 setInterval(this.moveBackToOutgoing.bind(this, this.sent, 60000), 10000);
             }
         };
@@ -44,10 +51,13 @@ var JSBus;
         });
 
         LocalStorageStore.prototype.add = function (message) {
+            // Convert message id to string to prevent comparison
+            // problems later on (the format on the wire is string)
             this.outgoing.add(message.id.toString(), message);
         };
 
         LocalStorageStore.prototype.ack = function (id) {
+            // Consider adding this message to an audit log
             this.sent.remove(id);
         };
 
@@ -56,11 +66,12 @@ var JSBus;
             var msgs = this.outgoing.all();
 
             msgs.forEach(function (m) {
+                // Callback returns a promise with message id as value
                 sendCallback(m).then(function (id) {
-                    _this.markSent(id);
+                    return _this.markSent(id);
                 }, function (err) {
                     console.log("Error sending message, delaying:", m, err);
-                    this.delay(m.id);
+                    _this.delay(m.id);
                 });
             });
         };
@@ -77,6 +88,7 @@ var JSBus;
             var m = this.outgoing.remove(id);
 
             if (m) {
+                // Add operation date for automatic queue to queue moves
                 queue.add(m.id, m, new Date());
             }
         };

@@ -39,7 +39,7 @@ module JSBus {
 
         remove(id: string): IMessage {
             // Removes an item and returns it (to be placed on any other store)
-            var matching = this.removeWhenMatches(m => { return m.id == id });
+            var matching = this.removeWhenMatches(m => m.id == id);
             return matching.length ? matching[0] : null;
         }
 
@@ -51,16 +51,14 @@ module JSBus {
         removeWhereLastOperationOlderThan(ms: number): IMessage[]{
             var cutOff = Date.now() - ms;
 
-            return this.removeWhenMatches(m => {
-                return m.lastOperationAt < cutOff;
-            });                
+            return this.removeWhenMatches(m => m.lastOperationAt < cutOff); 
         }
 
-        private removeWhenMatches(operator: (MessageContainer) => bool): IMessage[] {
+        private removeWhenMatches(operator: (MessageContainer) => boolean): IMessage[] {
             var q = this.queue,
                 matching = [];
 
-            var len = q.length
+            var len = q.length;
             while (len--) {
                 if (operator(q[len])) {
                     // match, store for return & remove

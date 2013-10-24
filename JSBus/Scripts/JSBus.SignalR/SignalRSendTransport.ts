@@ -6,10 +6,10 @@ module JSBus {
         // JQuery callbacks here. 
         private notifySentCallbacks: JQueryCallback = $.Callbacks();
 
-        constructor(public server: any) {
+        constructor(public hub: any) {
         }
 
-        send(message: IMessage): JQueryPromise {
+        send(message: IMessage): JQueryPromise<any> {
             console.log("Sending via SignalR", message);
 
             // Consider using a separate web worker for data pump
@@ -18,7 +18,7 @@ module JSBus {
             // we need to supply the id to the caller for .then
             var deferred = $.Deferred();
 
-            this.server.execute(message)
+            this.hub.server.execute(message)
                 .then(deferred.resolve(message.id))
                 .then(this.notifySentCallbacks.fire(message))
                 .fail(deferred.fail);

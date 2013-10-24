@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>JSBus.SignalR</id>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <authors>Tero Teelahti</authors>
     <owners>Tero Teelahti</owners>
     <licenseUrl>https://raw.github.com/teelahti/JSBus/master/LICENSE.md</licenseUrl>
@@ -15,7 +15,7 @@
     <description>JavaScript library to do store and forward in the browser using browser localstorage as intermediary store. This is the transport implementation that supplements the core JSBus library.
     For detailed usage see project page.
     </description>
-    <releaseNotes>Fixed webactivator issues.</releaseNotes>
+    <releaseNotes>Allow opening SignalR connection before initializing JSBus transport.</releaseNotes>
     <copyright>Copyright 2013 Tero Teelahti</copyright>
     <tags>JavaScript web realtime bus signalr</tags>
     <dependencies>
