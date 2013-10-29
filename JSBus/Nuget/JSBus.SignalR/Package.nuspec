@@ -19,7 +19,7 @@
     <copyright>Copyright 2013 Tero Teelahti</copyright>
     <tags>JavaScript web realtime bus signalr</tags>
     <dependencies>
-      <dependency id="JSBus" version="1.0.0" />
+      <dependency id="JSBus" version="1.1.0" />
       <dependency id="Microsoft.AspNet.SignalR.JS" version="1.0.1"/>
       <dependency id="WebActivator" version="1.5" />
     </dependencies>
