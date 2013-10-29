@@ -166,6 +166,36 @@
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery.d.ts" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
+    <Content Include="Scripts\JSBus.SignalR\SignalRSendTransport.min.js">
+      <DependentUpon>SignalRSendTransport.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JSBus.SignalR\SignalRSubscribeTransport.min.js">
+      <DependentUpon>SignalRSubscribeTransport.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JSBus\Bus.min.js">
+      <DependentUpon>Bus.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JSBus\Bus.min.js.map">
+      <DependentUpon>Bus.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JSBus\LocalStorageQueue.min.js">
+      <DependentUpon>LocalStorageQueue.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JSBus\LocalStorageQueue.min.js.map">
+      <DependentUpon>LocalStorageQueue.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JSBus\LocalStorageStore.min.js">
+      <DependentUpon>LocalStorageStore.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JSBus\LocalStorageStore.min.js.map">
+      <DependentUpon>LocalStorageStore.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JSBus.SignalR\SignalRSendTransport.min.js.map">
+      <DependentUpon>SignalRSendTransport.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JSBus.SignalR\SignalRSubscribeTransport.min.js.map">
+      <DependentUpon>SignalRSubscribeTransport.js</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="Scripts\JSBus\LocalStorageStore.ts" />
     <TypeScriptCompile Include="Scripts\JSBus\Bus.ts" />
     <Content Include="Scripts\jquery.signalR-2.0.0.js" />
