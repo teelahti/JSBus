@@ -60,7 +60,7 @@ module JSBus {
             msgs.forEach((m: IMessage) => {
                 // Callback returns a promise with message id as value
                 sendCallback(m).then(
-                    id => this.markSent(id),
+                    this.markSent,
                     err => {
                         console.log("Error sending message, delaying:", m, err);
                         this.delay(m.id);

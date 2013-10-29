@@ -54,7 +54,7 @@ module JSBus {
             return this.removeWhenMatches(m => m.lastOperationAt < cutOff); 
         }
 
-        private removeWhenMatches(operator: (MessageContainer) => boolean): IMessage[] {
+        private removeWhenMatches(operator: (m: MessageContainer) => boolean): IMessage[] {
             var q = this.queue,
                 matching = [];
 

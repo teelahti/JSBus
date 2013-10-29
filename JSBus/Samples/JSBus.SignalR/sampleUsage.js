@@ -24,14 +24,17 @@
     $.connection.hub.start(function () {
         form.addEventListener("submit", function (e) {
             var idSeed = Date.now(),
-                commands = [];
+                commands = [],
+                qty = form.count.valueAsNumber;
 
             e.preventDefault();
 
-            // TODO: Disable elements until done
+            // Disable elements until done
+            form.submit.disabled = "disabled";
+            form.count.disabled = "disabled";
             
             // Create a list of commands to send:
-            for (var i = 0; i < form.count.valueAsNumber; i++) {
+            for (var i = 0; i < qty; i++) {
                 commands.push({ id: idSeed + i, name: "test message" });
             }
 
@@ -46,6 +49,11 @@
                     // Change counter value on UI
                     status.notSent.value--;
                     status.outgoingQueue.value++;
+                    
+                    if (status.notSent.value === 0) {
+                        form.submit.disabled = "";
+                        form.count.disabled = "";
+                    }
                 },
                 this,
                 function () { console.log("All given to bus"); });
@@ -53,7 +61,7 @@
     });
     
     // Event handlers to change visualized message flow values
-    form.addEventListener("input", function () {
+    form.addEventListener("change", function () {
         status.origin = status.notSent.value = form.count.valueAsNumber;
 
         status.outgoingQueue.value = 0;

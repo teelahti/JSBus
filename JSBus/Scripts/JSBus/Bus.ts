@@ -24,10 +24,13 @@ module JSBus {
             this.store.containerName = name;
 
             // Subscribe to ack messages (2 phase commit)
-            this.subscribeTransport.ack(id => this.store.ack(id));
+            this.subscribeTransport.ack(this.store.ack);
 
             // Begin send loop
             this.sendMessages();
+
+            // Start message sending when browser is back online 
+            window.addEventListener("online", this.sendMessages.bind(this));
         }
 
         send(message: any) {
@@ -42,6 +45,9 @@ module JSBus {
             }
 
             this.store.add(message);
+
+            // If send loop is not ongoing, start it
+            this.sendMessages();
         }
 
         subscribe(
@@ -68,12 +74,16 @@ module JSBus {
         }
 
         sendMessages() {
-            // TODO: Do nothing if we are offline
-            this.store.sendAll(message => this.sendTransport.send(message));
+            // Do nothing if timer is running or if we are offline
+            if (this.sendTimer || (typeof navigator.onLine !== "undefined" && !navigator.onLine)) {
+                return;
+            }
+
+            this.store.sendAll(this.sendTransport.send);
 
             // TODO: Without a counter this will try all failing messages in never ending loop
-            // TODO: Consider pausing send timer if there are no messages, and then re-starting it when next message is give to bus
-            // Consider resetting timer if there are no new messages
+
+            // Consider pausing timer if there are no new messages
             this.sendTimer = setTimeout(this.sendMessages.bind(this), 100);
         }
 

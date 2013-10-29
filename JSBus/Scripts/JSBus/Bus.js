@@ -4,7 +4,6 @@ var JSBus;
 (function (JSBus) {
     var Bus = (function () {
         function Bus(name, sendTransport, subscribeTransport) {
-            var _this = this;
             this.sendTransport = sendTransport;
             this.subscribeTransport = subscribeTransport;
             this.store = new JSBus.LocalStorageStore();
@@ -15,12 +14,13 @@ var JSBus;
             this.store.containerName = name;
 
             // Subscribe to ack messages (2 phase commit)
-            this.subscribeTransport.ack(function (id) {
-                return _this.store.ack(id);
-            });
+            this.subscribeTransport.ack(this.store.ack);
 
             // Begin send loop
             this.sendMessages();
+
+            // Start message sending when browser is back online
+            window.addEventListener("online", this.sendMessages.bind(this));
         }
         Bus.prototype.send = function (message) {
             if (!message) {
@@ -32,6 +32,9 @@ var JSBus;
             }
 
             this.store.add(message);
+
+            // If send loop is not ongoing, start it
+            this.sendMessages();
         };
 
         Bus.prototype.subscribe = function (onMessageArrived, filter) {
@@ -55,15 +58,14 @@ var JSBus;
         };
 
         Bus.prototype.sendMessages = function () {
-            var _this = this;
-            // TODO: Do nothing if we are offline
-            this.store.sendAll(function (message) {
-                return _this.sendTransport.send(message);
-            });
+            if (this.sendTimer || (typeof navigator.onLine !== "undefined" && !navigator.onLine)) {
+                return;
+            }
+
+            this.store.sendAll(this.sendTransport.send);
 
             // TODO: Without a counter this will try all failing messages in never ending loop
-            // TODO: Consider pausing send timer if there are no messages, and then re-starting it when next message is give to bus
-            // Consider resetting timer if there are no new messages
+            // Consider pausing timer if there are no new messages
             this.sendTimer = setTimeout(this.sendMessages.bind(this), 100);
         };
 
