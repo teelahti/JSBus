@@ -54,13 +54,13 @@ module JSBus {
             this.sent.remove(id);
         }
 
-        sendAll(sendCallback: (IMessage) => any) {
+        sendAll(sendCallback: (message: IMessage) => any) {
             var msgs = this.outgoing.all();
 
             msgs.forEach((m: IMessage) => {
                 // Callback returns a promise with message id as value
                 sendCallback(m).then(
-                    this.markSent,
+                    this.markSent.bind(this),
                     err => {
                         console.log("Error sending message, delaying:", m, err);
                         this.delay(m.id);

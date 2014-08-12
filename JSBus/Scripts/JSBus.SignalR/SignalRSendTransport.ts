@@ -1,5 +1,5 @@
 /// <reference path="../JSBus/TransportInterfaces.ts" />
-/// <reference path="../jquery.d.ts" />
+/// <reference path="../typings/jquery/jquery.d.ts" />
 module JSBus {
     export class SignalRSendTransport implements ISendTransport {
         // Since SignalR is dependent on JQuery, it is ok to use 
@@ -17,6 +17,12 @@ module JSBus {
             // Use own deferred instead of SignalR provided promise as 
             // we need to supply the id to the caller for .then
             var deferred = $.Deferred();
+
+            if (this.hub === undefined) {
+                console.log("Hub is undefined");
+                deferred.fail();
+                return deferred.promise();
+            }
 
             this.hub.server.execute(message)
                 .then(deferred.resolve(message.id))

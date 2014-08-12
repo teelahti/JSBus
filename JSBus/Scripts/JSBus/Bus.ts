@@ -24,7 +24,7 @@ module JSBus {
             this.store.containerName = name;
 
             // Subscribe to ack messages (2 phase commit)
-            this.subscribeTransport.ack(this.store.ack);
+            this.subscribeTransport.ack(this.store.ack.bind(this.store));
 
             // Begin send loop
             this.sendMessages();
@@ -79,12 +79,14 @@ module JSBus {
                 return;
             }
 
-            this.store.sendAll(this.sendTransport.send);
+            this.sendMessagesCore();
+        }
 
-            // TODO: Without a counter this will try all failing messages in never ending loop
+        sendMessagesCore() {
+            this.store.sendAll(this.sendTransport.send.bind(this.sendTransport));
 
             // Consider pausing timer if there are no new messages
-            this.sendTimer = setTimeout(this.sendMessages.bind(this), 100);
+            this.sendTimer = setTimeout(this.sendMessagesCore.bind(this), 100);
         }
 
         static isFunc(f) {

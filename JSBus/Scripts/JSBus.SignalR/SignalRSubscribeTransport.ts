@@ -1,5 +1,5 @@
 /// <reference path="../JSBus/TransportInterfaces.ts" />
-/// <reference path="../jquery.d.ts" />
+/// <reference path="../typings/jquery/jquery.d.ts" />
 module JSBus {
     export class SignalRSubscribeTransport implements ISubscribeTransport {
         // Since SignalR is dependent on JQuery, it is ok to use 

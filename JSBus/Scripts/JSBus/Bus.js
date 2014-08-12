@@ -1,5 +1,6 @@
 /// <reference path="TransportInterfaces.ts" />
 /// <reference path="LocalStorageStore.ts" />
+
 var JSBus;
 (function (JSBus) {
     var Bus = (function () {
@@ -14,7 +15,7 @@ var JSBus;
             this.store.containerName = name;
 
             // Subscribe to ack messages (2 phase commit)
-            this.subscribeTransport.ack(this.store.ack);
+            this.subscribeTransport.ack(this.store.ack.bind(this.store));
 
             // Begin send loop
             this.sendMessages();
@@ -23,10 +24,12 @@ var JSBus;
             window.addEventListener("online", this.sendMessages.bind(this));
         }
         Bus.prototype.send = function (message) {
+            // Validate
             if (!message) {
                 return;
             }
 
+            // If ID property is missing generate it.
             if (!message.id) {
                 message.id = (new Date()).getTime();
             }
@@ -42,6 +45,8 @@ var JSBus;
                 throw new Error('Given subscribe callback must be a function');
             }
 
+            // If given filter is just the message type name or nothing,
+            // create a new filter function
             if (!Bus.isFunc(filter)) {
                 var eventName = filter;
                 filter = function (message) {
@@ -58,15 +63,19 @@ var JSBus;
         };
 
         Bus.prototype.sendMessages = function () {
+            // Do nothing if timer is running or if we are offline
             if (this.sendTimer || (typeof navigator.onLine !== "undefined" && !navigator.onLine)) {
                 return;
             }
 
-            this.store.sendAll(this.sendTransport.send);
+            this.sendMessagesCore();
+        };
 
-            // TODO: Without a counter this will try all failing messages in never ending loop
+        Bus.prototype.sendMessagesCore = function () {
+            this.store.sendAll(this.sendTransport.send.bind(this.sendTransport));
+
             // Consider pausing timer if there are no new messages
-            this.sendTimer = setTimeout(this.sendMessages.bind(this), 100);
+            this.sendTimer = setTimeout(this.sendMessagesCore.bind(this), 100);
         };
 
         Bus.isFunc = function (f) {

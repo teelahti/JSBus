@@ -1,5 +1,5 @@
 /// <reference path="../JSBus/TransportInterfaces.ts" />
-/// <reference path="../jquery.d.ts" />
+/// <reference path="../typings/jquery/jquery.d.ts" />
 var JSBus;
 (function (JSBus) {
     var SignalRSendTransport = (function () {
@@ -16,6 +16,12 @@ var JSBus;
             // Use own deferred instead of SignalR provided promise as
             // we need to supply the id to the caller for .then
             var deferred = $.Deferred();
+
+            if (this.hub === undefined) {
+                console.log("Hub is undefined");
+                deferred.fail();
+                return deferred.promise();
+            }
 
             this.hub.server.execute(message).then(deferred.resolve(message.id)).then(this.notifySentCallbacks.fire(message)).fail(deferred.fail);
 

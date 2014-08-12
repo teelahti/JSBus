@@ -73,6 +73,7 @@ var JSBus;
                 }
             }
 
+            // Store queue back to localstorage with items removed
             if (matching.length) {
                 this.queue = q;
             }

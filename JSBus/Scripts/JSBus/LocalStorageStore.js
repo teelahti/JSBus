@@ -67,7 +67,7 @@ var JSBus;
 
             msgs.forEach(function (m) {
                 // Callback returns a promise with message id as value
-                sendCallback(m).then(_this.markSent, function (err) {
+                sendCallback(m).then(_this.markSent.bind(_this), function (err) {
                     console.log("Error sending message, delaying:", m, err);
                     _this.delay(m.id);
                 });

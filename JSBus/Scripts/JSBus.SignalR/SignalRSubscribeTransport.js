@@ -1,5 +1,5 @@
 /// <reference path="../JSBus/TransportInterfaces.ts" />
-/// <reference path="../jquery.d.ts" />
+/// <reference path="../typings/jquery/jquery.d.ts" />
 var JSBus;
 (function (JSBus) {
     var SignalRSubscribeTransport = (function () {
